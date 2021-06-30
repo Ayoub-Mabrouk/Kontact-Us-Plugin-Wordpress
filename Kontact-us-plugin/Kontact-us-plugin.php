@@ -74,6 +74,8 @@ function activate()
 }
 function deactivate()
 {
+    global $wpdb;
+    $wpdb->query("DROP TABLE IF EXISTS wp_kontact_us_plug_fields");
 }
 function unistall()
 {
