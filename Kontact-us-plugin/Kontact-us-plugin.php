@@ -75,6 +75,8 @@ function deactivate()
 }
 function unistall()
 {
+    global $wpdb;
+    $wpdb->query("DROP TABLE IF EXISTS wp_kontact_us_plug_fields,wp_kontact_us_plug");
 }
 function create_values_table()
 {
@@ -177,68 +179,12 @@ function kontact_admin_menu_main()
 }
 function Kontact_settings_page()
 {
-    settings_header();
-    echo show_inputs();
-}
-function checkdata()
-{
-
-    return "heeeeeeeeeeeeeeeeeeeeeeeey";
+     show_inputs();
 }
 
-function settings_header()
-{
-    echo '<div class="wrap">
-    <h1>Settings!</h1>
-    <p>Set all your preferences here
-    </p>
-    </div>';
-}
 function show_inputs()
 {
-    global $wpdb;
-
-    $form = $wpdb->get_row("SELECT * FROM wp_kontact_us_plug_fields WHERE id = 1;");
-
-    $div = '<h3>Contact us</h3>';
-    $div .= '<form method="post" action="">';
-    $div .= '<label>First Name:</label>';
-    if($form->fname){
-        $div .= '<div><input type="radio" value="true" name="fname" checked required><span>YES</span><input type="radio" value="false" name="fname"><span>NO</span></div><br>';
-    }
-    else{
-        $div .= '<div><input type="radio" value="true" name="fname"  required><span>YES</span><input type="radio" value="false" checked name="fname"><span>NO</span></div><br>';
-    }
-    if($form->lname){
-        $div .= '<div><input type="radio" value="true" name="lname" checked required><span>YES</span><input type="radio" value="false" name="lname"><span>NO</span></div><br>';
-    }
-    else{
-        $div .= '<div><input type="radio" value="true" name="lname"  required><span>YES</span><input type="radio" value="false" checked name="lname"><span>NO</span></div><br>';
-    }
-    if($form->email){
-        $div .= '<div><input type="radio" value="true" name="email" checked required><span>YES</span><input type="radio" value="false" name="email"><span>NO</span></div><br>';
-    }
-    else{
-        $div .= '<div><input type="radio" value="true" name="email"  required><span>YES</span><input type="radio" value="false" checked name="email"><span>NO</span></div><br>';
-    }
-    if($form->subject){
-        $div .= '<div><input type="radio" value="true" name="subject" checked required><span>YES</span><input type="radio" value="false" name="subject"><span>NO</span></div><br>';
-    }
-    else{
-        $div .= '<div><input type="radio" value="true" name="subject"  required><span>YES</span><input type="radio" value="false" checked name="subject"><span>NO</span></div><br>';
-    }
-    if($form->message){
-        $div .= '<div><input type="radio" value="true" name="message" checked required><span>YES</span><input type="radio" value="false" name="message"><span>NO</span></div><br>';
-    }
-    else{
-        $div .= '<div><input type="radio" value="true" name="message"  required><span>YES</span><input type="radio" value="false" checked name="message"><span>NO</span></div><br>';
-    }
-    
-    
-   
-    $div .= '<input type="submit"  name="submit-true"><br>';
-    $div .= '</form>';
-    return $div;
+   echo require_once 'Settings.php';
 }
 
 //shortcode
@@ -251,3 +197,6 @@ register_activation_hook(__FILE__, 'create_values_table');
 
 //deactivation hook
 register_deactivation_hook(__FILE__, 'deactivate');
+
+//uninstall hook
+register_uninstall_hook(__FILE__, 'unistall')
