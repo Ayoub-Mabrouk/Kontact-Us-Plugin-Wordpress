@@ -199,4 +199,4 @@ register_activation_hook(__FILE__, 'create_values_table');
 register_deactivation_hook(__FILE__, 'deactivate');
 
 //uninstall hook
-register_uninstall_hook(__FILE__, 'unistall')
+register_uninstall_hook(__FILE__, 'unistall');
