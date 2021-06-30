@@ -42,28 +42,30 @@ function mycontact()
     $form = $wpdb->get_row("SELECT * FROM wp_kontact_us_plug_fields WHERE id = 1;");
 
     $div = '<h3>Contact us</h3>';
-    $div .='<form method="POST" action="">';
+    $div .='<form style = "display: grid;
+    grid-gap: 15px;
+    " method="POST" action="">';
     if($form->fname){
         $div .= '<label>First Name:</label>';
-        $div .= '<input type="text" name="firstname" placeholder="First name"><br>';
+        $div .= '<input type="text" name="firstname" placeholder="First name">';
     }
     if($form->lname){
         $div .= '<label>Lirst Name:</label>';
-        $div .= '<input type="text" name="lastname" placeholder="Last name"><br>';
+        $div .= '<input type="text" name="lastname" placeholder="Last name">';
     }
     if($form->email){
         $div .= '<label>Email:</label>';
-        $div .= '<input type="text" name="email" placeholder="Email"><br>';
+        $div .= '<input type="text" name="email" placeholder="Email">';
     }
     if($form->subject){
         $div .= '<label>Subject:</label>';
-        $div .= '<input type="text" name="message_subject" placeholder="Subject"><br>';
+        $div .= '<input type="text" name="message_subject" placeholder="Subject">';
     }
     if($form->message){
         $div .= '<label>Message:</label>';
-        $div .= '<input type="text" name="message_content" placeholder="Message"><br>';
+        $div .= '<input type="text" name="message_content" placeholder="Message">';
     }
-    $div .= '<input type="submit" name="submit-form"><br>';
+    $div .= '<input style="justify-self: baseline;" type="submit" name="submit-form">';
     $div .='</form>';
     return $div;
 }
