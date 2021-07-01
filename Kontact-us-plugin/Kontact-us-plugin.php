@@ -84,8 +84,10 @@ function unistall()
 }
 function create_values_table()
 {
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    // dbDelta($sql);
+    maybe_create_table($wpdb->base_prefix . $tablename, $sql);
     global $wpdb;
-    $charset_collate = $wpdb->get_charset_collate();
     $tablename = 'kontact_us_plug';
     $sql = "CREATE TABLE $wpdb->base_prefix$tablename (
         id int AUTO_INCREMENT,
@@ -96,7 +98,7 @@ function create_values_table()
         message_content varchar(255),
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         PRIMARY key(id)
-        ) $charset_collate;";
+        )";
 
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     // dbDelta($sql);
@@ -105,7 +107,7 @@ function create_values_table()
 function create_true_table()
 {
     global $wpdb;
-    $charset_collate = $wpdb->get_charset_collate();
+ 
     $tablename = 'kontact_us_plug_fields';
     $sql = "CREATE TABLE $wpdb->base_prefix$tablename (
         id INT,
@@ -114,7 +116,7 @@ function create_true_table()
         email BOOLEAN,
         subject BOOLEAN,
         message BOOLEAN
-        ) $charset_collate;";
+        )";
 
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
